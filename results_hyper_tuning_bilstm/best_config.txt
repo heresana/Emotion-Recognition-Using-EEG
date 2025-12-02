@@ -1,0 +1,5 @@
+Best Batch: 64
+Best Epochs: 100
+LSTM Units: 64
+Dropout: 0.3
+LR: 0.00045

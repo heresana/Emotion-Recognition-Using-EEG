@@ -1,0 +1,10 @@
+data/
+*.zip
+*.csv
+*.npy
+*.h5
+*.mp4
+*.tar.gz
+data/
+data/raw/
+data/processed/
