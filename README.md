@@ -10,40 +10,44 @@ This repository contains the official implementation of our paper: *Explainable 
 We propose a hybrid deep learning architecture that models both the temporal dynamics and spatial topology of EEG signals to predict Valence and Arousal (VA) states, while utilizing SHAP for attention-based interpretability.
 
 ## Workflow of The Project
-
-EEG (DEAP Dataset)
+```text
+EEG Input (DEAP)
         │
         ▼
 Preprocessing
   ├─ Channel Selection (32 Channels)
-  ├─ 8s Window Segmentation
-  └─ 4s Overlapping Step
+  ├─ 8-second Window Segmentation
+  └─ 4-second Overlapping Stride
         │
         ▼
 Feature Extraction
-  ├─ Differential Entropy (θ, α, β, γ bands)
+  ├─ Differential Entropy (θ, α, β, γ)
   ├─ Skewness
   └─ Kurtosis
         │
         ▼
-Structured Tensor (Epoch × Channel × Band × Feature)
+Structured Tensor
+  (Window × Channel × Band × Feature)
         │
         ▼
-BiLSTM (Temporal Modeling)
+BiLSTM
+  → Temporal Dependency Modeling
         │
         ▼
-Multi-View Graph Transformer
+Multi-View Graph Transformer (MVGT)
   ├─ Spatial Graph Encoding
   ├─ Spectral Embedding
-  └─ Self-Attention
+  └─ Multi-Head Self-Attention
         │
         ▼
-Classification via Russell’s Circumplex Model
-  ├─ Binarized High/Low Valence
-  └─ Binarized High/Low Arousal
+Emotion Classification
+  ├─ High / Low Valence
+  └─ High / Low Arousal
+  (Russell’s Circumplex Model)
         │
         ▼
-Attention-Based Interpretability (SHAP)
-
+Interpretability Layer
+  └─ SHAP-Based Feature Attribution
+```
 ## Data Availability
 The [DEAP Dataset](http://www.eecs.qmul.ac.uk/mmv/datasets/deap/) used in this study is a publicly available but restricted dataset. To run this code, you must independently request access from the original authors, sign the EULA, and place the downloaded data in the `data/raw/` directory.
